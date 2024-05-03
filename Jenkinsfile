@@ -1,40 +1,40 @@
 pipeline {
     agent any
+
     stages {
+        stage('Clean Workspace') {
+            steps {
+                // Clean the workspace
+                deleteDir()
+            }
+        }
+        stage('Clone') {
+            steps {
+                // Clone from your GitHub repository, using the correct branch name
+                git branch: "${env.BRANCH_NAME}", url: 'git@github.com:hemasrihitha/learningjenkins.git'
+            }
+        }
+
+
         stage('Build') {
             steps {
-                echo 'Building...'
-                // Add build commands here, if any (e.g., npm build for Node.js applications)
+                // Print build started
+                echo 'Build started'
             }
         }
+
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                // Add commands to execute tests, if any
+                // Print test started
+                echo 'Test started'
             }
         }
+
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
-                script {
-                    if (env.BRANCH_NAME == 'dev') {
-                        // Commands to deploy to development server
-                        sh 'scp -r * cloud_user@f120574411474f3dbf996693ff893a101c.mylabserver.com:/var/www/html/'
-                    } else if (env.BRANCH_NAME == 'test') {
-                        // Commands to deploy to testing server
-                        sh 'scp -r * cloud_user@f120574411474f3dbf996693ff893a102c.mylabserver.com:/var/www/html/'
-                    } else if (env.BRANCH_NAME == 'pro') {
-                        // Commands to deploy to production server
-                        sh 'scp -r * cloud_user@f120574411474f3dbf996693ff893a103c.mylabserver.com:/var/www/html/'
-                    }
-                }
+                // SCP files
+                sh 'scp -rp index.html f120574411474f3dbf996693ff893a102c.mylabserver.com:/var/www/html/'
             }
-        }
-    }
-    post {
-        always {
-            echo 'Cleaning up...'
-            // Add any cleanup commands
         }
     }
 }
