@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  triggers {
+    cron('H/5 * * * *') // Runs every 5 minutes
+  }
+
   stages {
     stage('Clean Workspace') {
       steps {
@@ -36,7 +40,8 @@ pipeline {
         // Use a secure HTTPS transfer method (e.g., curl with -u for credentials)
         // **Important:** Replace with your actual deployment command and URL
         sh """
-          echo 'srihitha'
+          echo ${env.WORKSPACE}
+          cp ${env.WORKSPACE}/index.html /var/www/html/
         """
       }
     }
