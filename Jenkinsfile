@@ -41,7 +41,7 @@ pipeline {
         // **Important:** Replace with your actual deployment command and URL
         sh """
           echo ${env.WORKSPACE}
-          cp ${env.WORKSPACE}/index.html /var/www/html/
+          sudo cp -rp ${env.WORKSPACE}/index.html /var/www/html/
         """
       }
     }
