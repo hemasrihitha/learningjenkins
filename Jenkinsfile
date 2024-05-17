@@ -41,7 +41,7 @@ pipeline {
         // **Important:** Replace with your actual deployment command and URL
         sh """
           echo ${env.WORKSPACE}
-          scp -rp index.html f120574411474f3dbf996693ff893a102c.mylabserver.com:/var/www/html/
+          sudo cp -rp index.html 35.172.228.247:/var/www/html/
         """
       }
     }
