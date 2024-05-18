@@ -11,7 +11,9 @@ pipeline {
         stage('Clone') {
             steps {
                 // Clone from your GitHub repository, using the correct branch name
-                git branch: "${env.BRANCH_NAME}", url: 'git@github.com:hemasrihitha/learningjenkins.git'
+                git branch: "${env.BRANCH_NAME}",
+                   credentialsId: 'hemasrihithadendukuri', // Replace with your credential ID
+                   url: 'https://github.com/hemasrihitha/learningjenkins.git'
             }
         }
 
