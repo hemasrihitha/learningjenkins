@@ -36,7 +36,7 @@ pipeline {
             steps {
                 // SCP files
                 sh """
-                scp -rp ${env.WORKSPACE}/index.html cloud_user@f120574411474f3dbf996693ff893a103c.mylabserver.com:/var/www/html/
+                sudo scp -rp ${env.WORKSPACE}/index.html cloud_user@f120574411474f3dbf996693ff893a103c.mylabserver.com:/var/www/html/
                 """
             }
         }
